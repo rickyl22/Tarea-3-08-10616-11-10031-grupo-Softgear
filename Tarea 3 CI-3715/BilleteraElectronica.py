@@ -9,3 +9,6 @@ class BilleteraElectronica(object):
         self.CI = CI
         self.PIN = PIN
         self.saldoActual = 0
+        
+    def recargar(self,mont,fech,id_):
+        pass
