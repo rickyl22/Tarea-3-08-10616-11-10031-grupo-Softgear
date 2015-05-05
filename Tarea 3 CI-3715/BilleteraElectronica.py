@@ -23,6 +23,9 @@ class BilleteraElectronica(object):
         infoRecarga = self.Credito(mont,fech,id_)
         self.listaCreditos.append(infoRecarga)
         return 0
+    
+    def consumir(self,mont,fecha,id,pinUsuario):
+        pass
         
 if __name__ == '__main__':
         fecha = datetime.datetime(2014,13,40)

@@ -58,6 +58,16 @@ class BilleteraElectronicaTester(unittest.TestCase):
         BillAlpha.recargar(10,datetime.datetime(2015,12,32),111)
         
     #Resultado obtenido: no da error por trabajarse con strings
+    
+#-------------------------------------------------------------------------------    
+    #CASO INTERNO: probar que se llama correctamente la función consumir
+    #Resultado esperado: TRUE
+    
+    def testConsumir(self):
+        BillAlpha.consumir(1,datetime.datetime(2012,12,15),111,123)
+        
+    #Resultado obtenido: No existe la función "consumir"
+#-------------------------------------------------------------------------------
 
 
 if __name__ == '__main__':
