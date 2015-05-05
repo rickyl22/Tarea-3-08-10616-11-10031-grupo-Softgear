@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from collections import namedtuple
+import datetime
 
 class BilleteraElectronica(object):
 
@@ -22,3 +23,6 @@ class BilleteraElectronica(object):
         infoRecarga = self.Credito(mont,fech,id_)
         self.listaCreditos.append(infoRecarga)
         return 0
+        
+if __name__ == '__main__':
+        fecha = datetime.datetime(2014,13,40)

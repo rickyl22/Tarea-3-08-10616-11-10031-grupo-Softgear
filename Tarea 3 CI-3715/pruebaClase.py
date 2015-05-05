@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import unittest
+import datetime
 from collections import namedtuple
 from BilleteraElectronica import BilleteraElectronica
 
@@ -21,7 +22,7 @@ class BilleteraElectronicaTester(unittest.TestCase):
     #Resultado esperado: TRUE
     
     def testRecargar(self):
-        BillAlpha.recargar(1,"2/2/1992",111)
+        BillAlpha.recargar(1,datetime.datetime(2012,12,15),111)
         
     #Resultado obtenido: No existe la función "recargar"
 #-------------------------------------------------------------------------------
@@ -31,7 +32,7 @@ class BilleteraElectronicaTester(unittest.TestCase):
     # Resultado esperado: se consiga en alguna posición de la lista
     
     def testVerificarExistenciaDeRecarga(self):
-        BillAlpha.recargar(2,"1/2/1993",455)
+        BillAlpha.recargar(2,datetime.datetime(1193,5,6),455)
         tester = False
         for i in range(0,len(BillAlpha.listaCreditos)):
             if (BillAlpha.listaCreditos[i].monto == 2):
@@ -45,10 +46,19 @@ class BilleteraElectronicaTester(unittest.TestCase):
     #Resultado esperado: De un mensaje de monto invalido.
     
     def testMontoNatural(self):
-       self.assertEqual(-1, BillAlpha.recargar(-1,"4/5/1996",345))
+       self.assertEqual(-1, BillAlpha.recargar(-1,datetime.datetime(1996,4,6),345))
         
     #Resultado obtenido: No niega la transacción.
 #-------------------------------------------------------------------------------
+
+    #CASO BORDE: probar que la fecha sea válida 
+    #Resultado esperado: que de error por introducir dia 32
+    
+    def testValidezFecha(self):
+        BillAlpha.recargar(10,datetime.datetime(2015,12,32),111)
+        
+    #Resultado obtenido: no da error por trabajarse con strings
+
 
 if __name__ == '__main__':
     unittest.main()
