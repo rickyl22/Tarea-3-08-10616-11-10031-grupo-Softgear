@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from collections import namedtuple
 
 class BilleteraElectronica(object):
@@ -14,5 +16,9 @@ class BilleteraElectronica(object):
         self.saldoActual = 0
         
     def recargar(self,mont,fech,id_):
+        if (mont < 0):
+            print("El monto de recarga no puede ser negativo")
+            return -1
         infoRecarga = self.Credito(mont,fech,id_)
         self.listaCreditos.append(infoRecarga)
+        return 0

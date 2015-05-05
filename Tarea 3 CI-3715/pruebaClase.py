@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import unittest
 from collections import namedtuple
 from BilleteraElectronica import BilleteraElectronica
@@ -26,13 +28,27 @@ class BilleteraElectronicaTester(unittest.TestCase):
     
     #CASO INTERNO: probar que se almacenó la recarga hecha en una estructura 
     #              llamada listaCreditos
-    # Resultado esperado: se consiga en la posición 1 de la lista
+    # Resultado esperado: se consiga en alguna posición de la lista
     
     def testVerificarExistenciaDeRecarga(self):
         BillAlpha.recargar(2,"1/2/1993",455)
-        self.assertEqual(2,(BillAlpha.listaCreditos[1].monto))
+        tester = False
+        for i in range(0,len(BillAlpha.listaCreditos)):
+            if (BillAlpha.listaCreditos[i].monto == 2):
+                tester = True
+        assert(tester)
         
     #Resultado obtenido: Falla al no existir la lista de creditos
+#-------------------------------------------------------------------------------
+
+    #CASO BORDE: probar que el monto introducido sea un número Natural
+    #Resultado esperado: De un mensaje de monto invalido.
+    
+    def testMontoNatural(self):
+       self.assertEqual(-1, BillAlpha.recargar(-1,"4/5/1996",345))
+        
+    #Resultado obtenido: No niega la transacción.
+#-------------------------------------------------------------------------------
 
 if __name__ == '__main__':
     unittest.main()
