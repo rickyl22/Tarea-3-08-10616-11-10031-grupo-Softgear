@@ -30,6 +30,8 @@ class BilleteraElectronica(object):
     def consumir(self,mont,fecha,ident,pinUsuario):
         if pinUsuario != self.PIN:
             raise Exception("El PIN introducido es invalido")
+        elif self.saldoActual < mont:
+            raise Exception("No hay suficiente saldo para realizar la operacion")
         else:
             infoConsumo = self.Consumo(mont,fecha,ident)
             self.listaConsumos.append(infoConsumo)

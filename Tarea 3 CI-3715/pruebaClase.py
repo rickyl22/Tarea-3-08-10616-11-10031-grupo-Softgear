@@ -69,7 +69,7 @@ class BilleteraElectronicaTester(unittest.TestCase):
     #Resultado esperado: TRUE
     
     def testLLamadaConsumir(self):
-        BillAlpha.consumir(1,datetime.datetime(2012,12,15),111,123)
+        BillAlpha.consumir(0,datetime.datetime(2012,12,15),111,123)
         
     #Resultado obtenido: No existe la función "consumir"
 #-------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ class BilleteraElectronicaTester(unittest.TestCase):
     def testConsumirPinErroneo(self): 
            
         try:
-            BillAlpha.consumir(1,datetime.datetime(2012,12,15),111,1234)
+            BillAlpha.consumir(1,datetime.datetime(2012,12,15),1113522,12343423423)
         except Exception:
             pass
         else:
@@ -90,7 +90,24 @@ class BilleteraElectronicaTester(unittest.TestCase):
     #Resultado obtenido: El metodo se ejecuta
 #-------------------------------------------------------------------------------
 
-   
+    #CASO INTERNO: probar que se introduzca monto mayor al saldo
+    #Resultado esperado: Exception
+    
+    def testSaldoInsuficiente(self): 
+        BillAlpha2 = BilleteraElectronica("Bill","Pedro","Molinaro",55555555,123)   
+        try:
+            BillAlpha2.consumir(100,datetime.datetime(2012,12,15),111,123)
+        except Exception:
+            pass
+        else:
+            self.fail("El metodo debio tirar error! El monto es mayor al Saldo")
+        
+        
+    #Resultado obtenido: El metodo se ejecuta
+#-------------------------------------------------------------------------------
+
+
+  
 
 if __name__ == '__main__':
     unittest.main()
