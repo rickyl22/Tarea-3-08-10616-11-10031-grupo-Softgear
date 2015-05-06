@@ -131,6 +131,17 @@ class BilleteraElectronicaTester(unittest.TestCase):
         
     #Resultado obtenido: No niega la transacción.
 #-------------------------------------------------------------------------------
+
+    #CASO INTERNO: probar que se llama correctamente la función saldo
+    #Resultado esperado: TRUE
+    
+    def testSaldo(self):
+        BillAlpha.saldo()
+        
+    #Resultado obtenido: No existe la función "saldo"
+#-------------------------------------------------------------------------------
+
+    
   
 
 if __name__ == '__main__':

@@ -19,6 +19,9 @@ class BilleteraElectronica(object):
         self.PIN = PIN
         self.saldoActual = 0
         
+    def saldo(self):
+        pass
+        
     def recargar(self,mont,fech,id_):
         if (mont < 0):
             print("El monto de recarga no puede ser negativo")
