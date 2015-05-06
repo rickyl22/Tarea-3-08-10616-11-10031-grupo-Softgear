@@ -55,10 +55,136 @@ class BilleteraElectronicaTester(unittest.TestCase):
     #Resultado esperado: que de error por introducir dia 32
     
     def testValidezFecha(self):
-        BillAlpha.recargar(10,datetime.datetime(2015,12,32),111)
+        try:
+            BillAlpha.recargar(1,datetime.datetime(2012,12,32),111)
+        except Exception:
+            pass
+        else:
+            self.fail("El metodo debio tirar error! Cantidad de dias erroneo para el mes")
         
     #Resultado obtenido: no da error por trabajarse con strings
+    
+#-------------------------------------------------------------------------------    
+    #CASO INTERNO: probar que se llama correctamente la función consumir
+    #Resultado esperado: TRUE
+    
+    def testLLamadaConsumir(self):
+        BillAlpha.consumir(0,datetime.datetime(2012,12,15),111,123)
+        
+    #Resultado obtenido: No existe la función "consumir"
+#-------------------------------------------------------------------------------
 
+    #CASO INTERNO: probar que se introduzca un PIN invalido
+    #Resultado esperado: Exception
+    
+    def testConsumirPinErroneo(self): 
+           
+        try:
+            BillAlpha.consumir(1,datetime.datetime(2012,12,15),1113522,12343423423)
+        except Exception:
+            pass
+        else:
+            self.fail("El metodo debio tirar error! El PIN ingresado es erroneo")
+        
+        
+    #Resultado obtenido: El metodo se ejecuta
+#-------------------------------------------------------------------------------
+
+    #CASO INTERNO: probar que se introduzca monto mayor al saldo
+    #Resultado esperado: Exception
+    
+    def testSaldoInsuficiente(self): 
+        BillAlpha2 = BilleteraElectronica("Bill","Pedro","Molinaro",55555555,123)   
+        try:
+            BillAlpha2.consumir(100,datetime.datetime(2012,12,15),111,123)
+        except Exception:
+            pass
+        else:
+            self.fail("El metodo debio tirar error! El monto es mayor al Saldo")
+        
+        
+    #Resultado obtenido: El metodo se ejecuta
+#-------------------------------------------------------------------------------
+
+    #CASO INTERNO: probar que se almacenó el consumo hecha en una estructura 
+    #              llamada listaConsumo
+    # Resultado esperado: se consiga en alguna posición de la lista
+    
+    def testVerificarExistenciaDeConsumo(self):
+        BillAlpha.recargar(100,datetime.datetime(1193,5,6),455)
+        BillAlpha.consumir(50,datetime.datetime(1193,5,6),455,123)
+        tester = False
+        for i in range(0,len(BillAlpha.listaConsumos)):
+            if (BillAlpha.listaConsumos[i].monto == 50):
+                tester = True
+        assert(tester)
+        
+    #Resultado obtenido: Falla al no existir la lista de consumos
+#-------------------------------------------------------------------------------
+
+
+    #CASO BORDE: probar que el monto introducido sea un número Natural
+    #Resultado esperado: De un mensaje de monto invalido.
+    
+    def testMontoNaturalConsumir(self):
+       self.assertEqual(-1, BillAlpha.consumir(-1,datetime.datetime(1996,4,6),345,123))
+        
+    #Resultado obtenido: No niega la transacción.
+#-------------------------------------------------------------------------------
+
+    #CASO INTERNO: probar que se llama correctamente la función saldo
+    #Resultado esperado: TRUE
+    
+    def testSaldo(self):
+        BillAlpha.saldo()
+        
+    #Resultado obtenido: No existe la función "saldo"
+#-------------------------------------------------------------------------------
+
+    #CASO INTERNO: probar que "saldo" retorna el monto correcto
+    #Resultado esperado: TRUE
+    
+    def testSaldoCorrecto(self):
+        BillAlpha = BilleteraElectronica("Bill","Pedro","Molinaro",5555555,123)
+        BillAlpha.recargar(100,datetime.datetime(1193,5,6),455)
+        BillAlpha.consumir(63,datetime.datetime(1193,5,6),455,123)
+        self.assertEqual(37, BillAlpha.saldo(), "Saldo erroneo")
+        
+    #Resultado obtenido: El saldo es incorrecto"
+#-------------------------------------------------------------------------------
+
+    #CASO BORDE: probar que un monto grande tire error 
+    #Resultado esperado: Excption
+    
+    def testMontoGrandeRecarga(self):
+        try:
+            BillAlpha.recargar(2^32,datetime.datetime(2012,12,32),111)
+        except Exception:
+            pass
+        else:
+            self.fail("El metodo debio tirar error! Cantidad del monto es muy grande")
+        
+    #Resultado obtenido: da error por ser un entero muy grande
+    
+#------------------------------------------------------------------------------- 
+
+    #CASO BORDE: probar que un monto grande tire error 
+    #Resultado esperado: Excption
+    
+    def testMontoGrandeConsumo(self):
+        try:
+            BillAlpha.consumir(2^32,datetime.datetime(2012,12,32),111)
+        except Exception:
+            pass
+        else:
+            self.fail("El metodo debio tirar error! Cantidad del monto es muy grande")
+        
+    #Resultado obtenido: da error por ser un entero muy grande
+    
+#-------------------------------------------------------------------------------       
+
+    
+  
 
 if __name__ == '__main__':
     unittest.main()
