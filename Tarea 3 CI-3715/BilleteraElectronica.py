@@ -20,7 +20,7 @@ class BilleteraElectronica(object):
         self.saldoActual = 0
         
     def saldo(self):
-        pass
+        return self.saldoActual
         
     def recargar(self,mont,fech,id_):
         if (mont < 0):

@@ -141,6 +141,18 @@ class BilleteraElectronicaTester(unittest.TestCase):
     #Resultado obtenido: No existe la función "saldo"
 #-------------------------------------------------------------------------------
 
+    #CASO INTERNO: probar que "saldo" retorna el monto correcto
+    #Resultado esperado: TRUE
+    
+    def testSaldoCorrecto(self):
+        BillAlpha = BilleteraElectronica("Bill","Pedro","Molinaro",5555555,123)
+        BillAlpha.recargar(100,datetime.datetime(1193,5,6),455)
+        BillAlpha.consumir(63,datetime.datetime(1193,5,6),455,123)
+        self.assertEqual(37, BillAlpha.saldo(), "Saldo erroneo")
+        
+    #Resultado obtenido: El saldo es incorrecto"
+#-------------------------------------------------------------------------------
+
     
   
 
