@@ -29,6 +29,9 @@ class BilleteraElectronica(object):
         return 0
     
     def consumir(self,mont,fecha,ident,pinUsuario):
+        if (mont < 0):
+            print("El monto de recarga no puede ser negativo")
+            return -1
         if pinUsuario != self.PIN:
             raise Exception("El PIN introducido es invalido")
         elif self.saldoActual < mont:

@@ -106,8 +106,8 @@ class BilleteraElectronicaTester(unittest.TestCase):
     #Resultado obtenido: El metodo se ejecuta
 #-------------------------------------------------------------------------------
 
-    #CASO INTERNO: probar que se almacenó la recarga hecha en una estructura 
-    #              llamada listaCreditos
+    #CASO INTERNO: probar que se almacenó el consumo hecha en una estructura 
+    #              llamada listaConsumo
     # Resultado esperado: se consiga en alguna posición de la lista
     
     def testVerificarExistenciaDeConsumo(self):
@@ -120,6 +120,16 @@ class BilleteraElectronicaTester(unittest.TestCase):
         assert(tester)
         
     #Resultado obtenido: Falla al no existir la lista de consumos
+#-------------------------------------------------------------------------------
+
+
+    #CASO BORDE: probar que el monto introducido sea un número Natural
+    #Resultado esperado: De un mensaje de monto invalido.
+    
+    def testMontoNaturalConsumir(self):
+       self.assertEqual(-1, BillAlpha.consumir(-1,datetime.datetime(1996,4,6),345,123))
+        
+    #Resultado obtenido: No niega la transacción.
 #-------------------------------------------------------------------------------
   
 
