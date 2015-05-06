@@ -106,7 +106,21 @@ class BilleteraElectronicaTester(unittest.TestCase):
     #Resultado obtenido: El metodo se ejecuta
 #-------------------------------------------------------------------------------
 
-
+    #CASO INTERNO: probar que se almacenó la recarga hecha en una estructura 
+    #              llamada listaCreditos
+    # Resultado esperado: se consiga en alguna posición de la lista
+    
+    def testVerificarExistenciaDeConsumo(self):
+        BillAlpha.recargar(100,datetime.datetime(1193,5,6),455)
+        BillAlpha.consumir(50,datetime.datetime(1193,5,6),455,123)
+        tester = False
+        for i in range(0,len(BillAlpha.listaConsumos)):
+            if (BillAlpha.listaConsumos[i].monto == 50):
+                tester = True
+        assert(tester)
+        
+    #Resultado obtenido: Falla al no existir la lista de consumos
+#-------------------------------------------------------------------------------
   
 
 if __name__ == '__main__':

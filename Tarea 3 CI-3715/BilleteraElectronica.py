@@ -25,6 +25,7 @@ class BilleteraElectronica(object):
             return -1
         infoRecarga = self.Credito(mont,fech,id_)
         self.listaCreditos.append(infoRecarga)
+        self.saldoActual += mont
         return 0
     
     def consumir(self,mont,fecha,ident,pinUsuario):
