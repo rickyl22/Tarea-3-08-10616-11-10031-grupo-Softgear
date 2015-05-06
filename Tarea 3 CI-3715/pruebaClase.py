@@ -153,6 +153,36 @@ class BilleteraElectronicaTester(unittest.TestCase):
     #Resultado obtenido: El saldo es incorrecto"
 #-------------------------------------------------------------------------------
 
+    #CASO BORDE: probar que un monto grande tire error 
+    #Resultado esperado: Excption
+    
+    def testMontoGrandeRecarga(self):
+        try:
+            BillAlpha.recargar(2^32,datetime.datetime(2012,12,32),111)
+        except Exception:
+            pass
+        else:
+            self.fail("El metodo debio tirar error! Cantidad del monto es muy grande")
+        
+    #Resultado obtenido: da error por ser un entero muy grande
+    
+#------------------------------------------------------------------------------- 
+
+    #CASO BORDE: probar que un monto grande tire error 
+    #Resultado esperado: Excption
+    
+    def testMontoGrandeConsumo(self):
+        try:
+            BillAlpha.consumir(2^32,datetime.datetime(2012,12,32),111)
+        except Exception:
+            pass
+        else:
+            self.fail("El metodo debio tirar error! Cantidad del monto es muy grande")
+        
+    #Resultado obtenido: da error por ser un entero muy grande
+    
+#-------------------------------------------------------------------------------       
+
     
   
 
