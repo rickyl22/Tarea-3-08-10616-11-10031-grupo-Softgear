@@ -55,7 +55,12 @@ class BilleteraElectronicaTester(unittest.TestCase):
     #Resultado esperado: que de error por introducir dia 32
     
     def testValidezFecha(self):
-        BillAlpha.recargar(10,datetime.datetime(2015,12,32),111)
+        try:
+            BillAlpha.recargar(1,datetime.datetime(2012,12,32),111)
+        except Exception:
+            pass
+        else:
+            self.fail("El metodo debio tirar error! Cantidad de dias erroneo para el mes")
         
     #Resultado obtenido: no da error por trabajarse con strings
     
@@ -63,12 +68,29 @@ class BilleteraElectronicaTester(unittest.TestCase):
     #CASO INTERNO: probar que se llama correctamente la función consumir
     #Resultado esperado: TRUE
     
-    def testConsumir(self):
+    def testLLamadaConsumir(self):
         BillAlpha.consumir(1,datetime.datetime(2012,12,15),111,123)
         
     #Resultado obtenido: No existe la función "consumir"
 #-------------------------------------------------------------------------------
 
+    #CASO INTERNO: probar que se introduzca un PIN invalido
+    #Resultado esperado: Exception
+    
+    def testConsumirPinErroneo(self): 
+           
+        try:
+            BillAlpha.consumir(1,datetime.datetime(2012,12,15),111,1234)
+        except Exception:
+            pass
+        else:
+            self.fail("El metodo debio tirar error! El PIN ingresado es erroneo")
+        
+        
+    #Resultado obtenido: El metodo se ejecuta
+#-------------------------------------------------------------------------------
+
+   
 
 if __name__ == '__main__':
     unittest.main()

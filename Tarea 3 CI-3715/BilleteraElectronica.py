@@ -6,8 +6,11 @@ import datetime
 class BilleteraElectronica(object):
 
     Credito = namedtuple('Credito', 'monto fecha idEst') #Estructura del crédito
+    Consumo = namedtuple('Consumo', 'monto fecha idEst') #Estructura del consumo
+    
     listaCreditos = []
-
+    listaConsumos = []
+    
     def __init__(self,ident, nombres, apellidos, CI, PIN):
         self.identificador = ident
         self.nombre = nombres
@@ -24,8 +27,13 @@ class BilleteraElectronica(object):
         self.listaCreditos.append(infoRecarga)
         return 0
     
-    def consumir(self,mont,fecha,id,pinUsuario):
-        pass
+    def consumir(self,mont,fecha,ident,pinUsuario):
+        if pinUsuario != self.PIN:
+            raise Exception("El PIN introducido es invalido")
+        else:
+            infoConsumo = self.Consumo(mont,fecha,ident)
+            self.listaConsumos.append(infoConsumo)
+            self.saldoActual -= mont
         
 if __name__ == '__main__':
         fecha = datetime.datetime(2014,13,40)
