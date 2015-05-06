@@ -45,7 +45,7 @@ class BilleteraElectronicaTester(unittest.TestCase):
     #CASO BORDE: probar que el monto introducido sea un número Natural
     #Resultado esperado: De un mensaje de monto invalido.
     
-    def testMontoNatural(self):
+    def testMontoNatural(self):  
        self.assertEqual(-1, BillAlpha.recargar(-1,datetime.datetime(1996,4,6),345))
         
     #Resultado obtenido: No niega la transacción.
